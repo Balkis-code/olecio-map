@@ -1,0 +1,6 @@
+dash
+dash-leaflet
+pandas
+openpyxl
+Office365-REST-Python-Client
+
