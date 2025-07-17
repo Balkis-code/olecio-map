@@ -7,6 +7,8 @@ import dash
 from dash import dcc, html, Output, Input
 import dash_leaflet as dl
 
+import os
+
 # --- CONFIG SHAREPOINT ---
 site_url = "https://olicio.sharepoint.com/sites/Plateforme"
 file_relative_url = "/sites/Plateforme/Fichier contacts.xlsx"
@@ -41,7 +43,6 @@ app.layout = html.Div([
 def update_map(n):
     try:
         df = get_excel_from_sharepoint()
-        # Supposons que ton Excel a des colonnes 'Latitude', 'Longitude', 'Nom' pour placer les marqueurs
         markers = []
         for _, row in df.iterrows():
             marker = dl.Marker(position=[row['Latitude'], row['Longitude']], children=dl.Tooltip(row['Nom']))
@@ -52,7 +53,10 @@ def update_map(n):
         return [dl.TileLayer()]  # carte vide si erreur
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 8050))
+    app.run(host="0.0.0.0", port=port, debug=True)
+
+
 
 
 
