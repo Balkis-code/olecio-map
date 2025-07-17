@@ -1,4 +1,0 @@
-dash
-dash-leaflet
-pandas
-openpyxl
